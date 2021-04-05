@@ -12,9 +12,9 @@ place to try out interesting code toys
 
 - [ ] [fes.js](https://github.com/WeBankFinTech/fes.js/tree/vue3)
 - [ ] vite
-- [ ] strapy
+- [ ] [strapi](https://strapi.io/)
 - [ ] react
 - [ ] flutter
 - [ ] three.js
-- [ ] 
-
+- [ ] [tailwindcss](https://tailwindcss.com/)
+- [ ] [datadog](https://www.datadoghq.com/)
