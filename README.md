@@ -18,3 +18,4 @@ place to try out interesting code toys
 - [ ] three.js
 - [ ] [tailwindcss](https://tailwindcss.com/)
 - [ ] [datadog](https://www.datadoghq.com/)
+- [ ] [joplin](https://github.com/laurent22/joplin) :印象笔记替代品
