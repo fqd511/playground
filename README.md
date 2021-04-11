@@ -19,3 +19,5 @@ place to try out interesting code toys
 - [ ] [tailwindcss](https://tailwindcss.com/)
 - [ ] [datadog](https://www.datadoghq.com/)
 - [ ] [joplin](https://github.com/laurent22/joplin) :印象笔记替代品
+- [ ] [lowdb](https://github.com/typicode/lowdb):浏览器端数据存储方案尝试
+- [ ] Vite + Vue 3 + TS + VSCode + Volar !! 看上去好像一堆东西，其实 npm init @vitejs/app 然后选 vue-ts 就好了
