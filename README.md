@@ -13,9 +13,9 @@ place to try out interesting code toys
 - [ ] [fes.js](https://github.com/WeBankFinTech/fes.js/tree/vue3)
 - [ ] vite
 - [ ] [strapi](https://strapi.io/)
-- [ ] react
+- [x] react
 - [ ] flutter
-- [ ] three.js
+- [x] three.js
 - [ ] [tailwindcss](https://tailwindcss.com/)
 - [ ] [datadog](https://www.datadoghq.com/)
 - [ ] [joplin](https://github.com/laurent22/joplin) :印象笔记替代品
