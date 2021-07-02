@@ -1,14 +1,8 @@
-### **Playground**
-
-------
+# Playground
 
 place to try out interesting code toys
 
-
-
-### **Waiting list**
-
-------
+## **Waiting list**
 
 - [ ] [fes.js](https://github.com/WeBankFinTech/fes.js/tree/vue3)
 - [ ] vite
