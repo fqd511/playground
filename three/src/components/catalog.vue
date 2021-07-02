@@ -1,6 +1,6 @@
 <template>
   <div :class="['container', isPin ? 'pin' : '']">
-    <p>List of Subject for Three.js</p>
+    <p v-if="!isPin">List of Subject for Three.js</p>
     <div class="subject-entrance-list">
       <router-link v-for="item in subjects" :key="item.path" :to="item.path">{{
         item.label
@@ -46,32 +46,51 @@ export default Vue.defineComponent({
   margin: auto;
   p {
     flex: 0 0 40px;
+    text-align: center;
   }
   .subject-entrance-list {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-flow: row wrap;
     a {
       margin: 1em;
+      text-decoration: none;
+      padding: 8px 16px;
+      background-color: whitesmoke;
+      border-radius: 4px;
     }
   }
   &.pin {
-    width: 120px;
+    width: fit-content;
     position: absolute;
     left: 2em;
     bottom: calc(100vh - 5px);
-    border-bottom: 5px grey solid;
+    top: unset;
+    border-bottom: 5px #0000004a solid;
     border-radius: 5px;
-    transition: width 0.2s ease-in, bottom 0.2s ease-in, top 0.2s ease-in,
-      border 0.2s ease-in;
-    background-color: #ffffff99;
-
+    transition: bottom 1s ease-in, top 1s ease-in, border-color 1s ease-in;
+    background-color: #00000023;
+    height: fit-content;
+    padding: 8px 16px;
+    .subject-entrance-list {
+      display: flex;
+      align-items: center;
+      flex-flow: column nowrap;
+      a {
+        font-size: 12px;
+        margin: 0;
+        padding: 4px 8px;
+      }
+      a:not(:nth-last-child(1)) {
+        margin-bottom: 4px;
+      }
+    }
     &:hover {
       bottom: unset;
-      top: 0;
+      top: 4px;
       border-color: transparent;
-      transition: width 0.2s ease-out, bottom 0.2s ease-out, top 0.2s ease-out,
-        border 0.2s ease-out;
+      transition: bottom 1s ease-out, top 1s ease-out, border-color 1s ease-out;
     }
   }
 }
