@@ -1,4 +1,8 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
+import Router from "vue-router";
+import routes from "./routes/index";
 
-createApp(App).mount('#app')
+createApp(App)
+  .use(Router.createRouter({ routes, history: Router.createWebHistory() }))
+  .mount("#app");
