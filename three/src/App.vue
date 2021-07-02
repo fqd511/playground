@@ -1,5 +1,6 @@
 <template>
-  <catalog />
+  <Catalog v-if="$route.path !== '/'" :isPin="true" />
+  <router-view></router-view>
 </template>
 
 <script lang="ts" setup></script>

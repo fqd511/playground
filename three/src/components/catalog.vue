@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div :class="['container', isPin ? 'pin' : '']">
     <p>List of Subject for Three.js</p>
     <div class="subject-entrance-list">
       <router-link v-for="item in subjects" :key="item.path" :to="item.path">{{
@@ -12,6 +12,12 @@
 <script lang="ts">
 import * as Vue from "vue";
 import routes from "../routes/index";
+
+interface Output {
+  subjects: any[];
+  [attr: string]: any;
+}
+
 export default Vue.defineComponent({
   name: "Catalog",
   props: {
@@ -21,10 +27,10 @@ export default Vue.defineComponent({
       default: false,
     },
   },
-  setup() {
+  setup(props): Output {
     const subjects = routes;
 
-    return {};
+    return { isPin: props.isPin, subjects };
   },
 });
 </script>
@@ -34,7 +40,7 @@ export default Vue.defineComponent({
   width: 100%;
   height: 100%;
   display: flex;
-  flex-flow: columns nowrap;
+  flex-flow: column nowrap;
   align-items: stretch;
   max-width: 600px;
   margin: auto;
@@ -44,6 +50,7 @@ export default Vue.defineComponent({
   .subject-entrance-list {
     display: flex;
     align-items: center;
+    flex-flow: row wrap;
     a {
       margin: 1em;
     }
@@ -55,12 +62,16 @@ export default Vue.defineComponent({
     bottom: calc(100vh - 5px);
     border-bottom: 5px grey solid;
     border-radius: 5px;
-    transition: all 0.2s ease-in;
+    transition: width 0.2s ease-in, bottom 0.2s ease-in, top 0.2s ease-in,
+      border 0.2s ease-in;
+    background-color: #ffffff99;
+
     &:hover {
       bottom: unset;
       top: 0;
       border-color: transparent;
-      transition: all 0.2s ease-out;
+      transition: width 0.2s ease-out, bottom 0.2s ease-out, top 0.2s ease-out,
+        border 0.2s ease-out;
     }
   }
 }
