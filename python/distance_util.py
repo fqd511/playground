@@ -41,7 +41,8 @@ def get_vertical_distance_line_of_buildings(first_building: BaseResidenceBuildin
         for i, building_line_segment in enumerate(all_segments):
             is_vertical = building_line_segment.is_vertical()
             min_y, max_y = building_line_segment.min_y, building_line_segment.max_y
-            other_building = second_building if i < len(first_building_line_segments) else first_building
+            other_building = second_building if i < len(
+                first_building_line_segments) else first_building
             for coord in other_building.geometry_simplified.boundary.coords:
                 x, y = coord[0], coord[1]
                 if is_vertical and x == building_line_segment.x0:
@@ -57,7 +58,8 @@ def get_vertical_distance_line_of_buildings(first_building: BaseResidenceBuildin
                             min_distance_line = LineSegment(x, y, x, max_y)
                 if not is_vertical:
                     # 非垂直
-                    coordinate = building_line_segment.get_coordinate_of_given_x(x)
+                    coordinate = building_line_segment.get_coordinate_of_given_x(
+                        x)
                     if coordinate is not None:
                         x1: float = coordinate[0]
                         y1: float = coordinate[1]
@@ -88,7 +90,8 @@ def get_horizontal_distance_line_of_buildings(first_building: BaseResidenceBuild
         for i, building_line_segment in enumerate(all_segments):
             is_horizontal = building_line_segment.is_horizontal()
             min_x, max_x = building_line_segment.min_x, building_line_segment.max_x
-            other_building = second_building if i < len(first_building_line_segments) else first_building
+            other_building = second_building if i < len(
+                first_building_line_segments) else first_building
             for coord in other_building.geometry_simplified.boundary.coords:
                 x, y = coord[0], coord[1]
                 if is_horizontal and y == building_line_segment.y0:
@@ -104,7 +107,8 @@ def get_horizontal_distance_line_of_buildings(first_building: BaseResidenceBuild
                             min_distance_line = LineSegment(x, y, max_x, y)
                 if not is_horizontal:
                     # 非平行
-                    coordinate = building_line_segment.get_coordinate_of_given_y(y)
+                    coordinate = building_line_segment.get_coordinate_of_given_y(
+                        y)
                     if coordinate is not None:
                         x1: float = coordinate[0]
                         y1: float = coordinate[1]
@@ -141,7 +145,8 @@ def get_regulation_line_of_buildings(object_building: BaseResidenceBuilding,
             continue
         line_segment = coordinate_system.data
         # 遮挡建筑的轮廓，换到新的坐标系中
-        original_coords = list(object_building.geometry_simplified.exterior.coords)
+        original_coords = list(
+            object_building.geometry_simplified.exterior.coords)
         new_coords = coordinate_system.transform_coord_list(original_coords)
         maxy = max([coord[1] for coord in new_coords])
         if maxy <= 0:
@@ -174,8 +179,11 @@ def get_regulation_line_of_buildings(object_building: BaseResidenceBuilding,
                 foot_line = LineSegment(x, 0, x, y)
                 if current_line is None or foot_line.length < current_line.length:
                     # 要把这个线段翻译回去
-                    original_x0, original_y0 = coordinate_system.get_original_coordinate(x, 0)
-                    original_x1, original_y1 = coordinate_system.get_original_coordinate(x, y)
-                    original_foot_line = LineSegment(original_x0, original_y0, original_x1, original_y1)
+                    original_x0, original_y0 = coordinate_system.get_original_coordinate(
+                        x, 0)
+                    original_x1, original_y1 = coordinate_system.get_original_coordinate(
+                        x, y)
+                    original_foot_line = LineSegment(
+                        original_x0, original_y0, original_x1, original_y1)
                     current_line = original_foot_line
     return current_line
