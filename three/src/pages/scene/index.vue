@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import * as THREE from "https://cdn.skypack.dev/three@0.129.0";
+import * as THREE from "three";
 
 function main() {
   console.log("into main");

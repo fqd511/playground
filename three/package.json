@@ -6,6 +6,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "three": "^0.130.0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.10"
   },
