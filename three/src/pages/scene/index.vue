@@ -6,23 +6,24 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import * as THREE from "three";
-
-function main() {
-  console.log("into main");
-
+function init() {
   /** canvas dom */
   const canvasDom = document.querySelector("#canvas");
 
+  if (!canvasDom) return;
   const renderer = new THREE.WebGLRenderer({
     canvas: canvasDom,
   });
   renderer.setClearColor(0xaaaaaa);
   renderer.shadowMap.enabled = true;
 }
-
-main();
+export default {
+  created() {
+    init();
+  },
+};
 </script>
 
 <style lang="scss" scoped>
