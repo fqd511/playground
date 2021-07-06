@@ -8,22 +8,16 @@
 
 <script>
 import * as THREE from "three";
-function init() {
-  /** canvas dom */
-  const canvasDom = document.querySelector("#canvas");
+/** canvas dom */
+const canvasDom = document.querySelector("#canvas");
 
-  if (!canvasDom) return;
+if (canvasDom) {
   const renderer = new THREE.WebGLRenderer({
     canvas: canvasDom,
   });
   renderer.setClearColor(0xaaaaaa);
   renderer.shadowMap.enabled = true;
 }
-export default {
-  created() {
-    init();
-  },
-};
 </script>
 
 <style lang="scss" scoped>
