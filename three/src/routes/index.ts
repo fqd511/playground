@@ -1,7 +1,7 @@
 export default [
   {
     path: "/",
-    component: () => import("../components/Catalog.vue"),
+    component: () => import("../App.vue"),
     name: "Catalog",
     label: "目录页",
   },

@@ -1,6 +1,6 @@
 <template>
-  <div :class="['container', isPin ? 'pin' : '']">
-    <p v-if="!isPin">List of Subject for Three.js</p>
+  <div :class="['container', pin ? 'pin' : '']">
+    <p v-if="!pin">{{ head }}</p>
     <div class="subject-entrance-list">
       <router-link v-for="item in subjects" :key="item.path" :to="item.path">{{
         item.label
@@ -9,28 +9,37 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import * as Vue from "vue";
-import routes from "../routes/index";
-
-interface Output {
-  subjects: any[];
-  [attr: string]: any;
-}
 
 export default Vue.defineComponent({
   name: "Catalog",
   props: {
-    isPin: {
-      type: Boolean,
+    root: {
+      type: String,
       required: false,
-      default: false,
+      default: "/",
+    },
+    head: {
+      type: String,
+      required: false,
+      default: "Catalog",
+    },
+    subjects: {
+      type: Array,
+      required: true,
+      default() {
+        return [];
+      },
     },
   },
-  setup(props): Output {
-    const subjects = routes;
-
-    return { isPin: props.isPin, subjects };
+  setup(props) {
+    return props;
+  },
+  computed: {
+    pin() {
+      return this.$route.path !== this.root;
+    },
   },
 });
 </script>
@@ -67,9 +76,10 @@ export default Vue.defineComponent({
     left: 2em;
     bottom: calc(100vh - 5px);
     top: unset;
-    border-bottom: 5px #0000004a solid;
+    border-bottom: 5px rgba(0, 0, 0, 0.3) solid;
     border-radius: 5px;
-    transition: bottom 1s ease-in, top 1s ease-in, border-color 1s ease-in;
+    transition: all 0.2s ease-in;
+    transition-delay: 1s;
     background-color: #00000023;
     height: fit-content;
     padding: 8px 16px;
@@ -87,10 +97,9 @@ export default Vue.defineComponent({
       }
     }
     &:hover {
-      bottom: unset;
-      top: 4px;
+      transform: translate(0, calc(100% - 5px));
       border-color: transparent;
-      transition: bottom 1s ease-out, top 1s ease-out, border-color 1s ease-out;
+      transition: all 0.2s ease-out;
     }
   }
 }
