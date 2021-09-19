@@ -5,5 +5,5 @@ This folder uses vue3 + vite + TS to test a three.js demo, each folder in `pages
 ## Todo
 
  - [ ] add vue-route
- - [x] add `scene` folder and move exsting code 
+ - [x] add `scene` folder and move existing code 
 
