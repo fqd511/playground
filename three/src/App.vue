@@ -3,8 +3,9 @@
   <router-view v-if="$route.path !== '/'" class="root"></router-view>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import routes from "./routes/index";
+import { Catalog } from "@digvan/c-v-3";
 </script>
 
 <style lang="scss" scoped>

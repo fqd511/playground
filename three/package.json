@@ -6,6 +6,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@digvan/c-v-3": "^0.0.1",
     "normalize.css": "^8.0.1",
     "three": "^0.130.0",
     "vue": "^3.0.5",
