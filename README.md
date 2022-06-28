@@ -8,6 +8,7 @@ place to try out interesting code toys
 - [ ] vite
 - [ ] [strapi](https://strapi.io/)
 - [x] react
+- [x] playwright
 - [ ] flutter
 - [x] three.js
 - [ ] [tailwindcss](https://tailwindcss.com/)
