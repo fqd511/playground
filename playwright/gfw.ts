@@ -1,9 +1,7 @@
 import { chromium } from "playwright";
-import { Page } from "@playwright/test";
 
 export const GFWCheckIn = async () => {
   const browser = await chromium.launch({
-    // headless: false,
     timeout: 0,
     logger: {
       isEnabled: (name) => name === "browser",
@@ -21,22 +19,19 @@ export const GFWCheckIn = async () => {
 
   await page.locator("text=Read").click({ timeout: 0 });
 
-  const isCheckedIn = await checkStatus(page);
-  if (isCheckedIn) {
-    browser.close();
+  const checkInLabel = await page.locator("#checkin-div").textContent();
+
+  if (checkInLabel?.trim() === "每日签到") {
+    await page.locator("#checkin-div").click();
+    const resultLabel = await page.locator("#swal2-title").textContent();
+    if (resultLabel?.trim() === "签到成功") {
+      browser.close().then(() => {
+        return "签到成功"
+      });
+    } else {
+      throw new Error("gfw fail:resultLabel 不是 签到成功");
+    }
   } else {
-    throw new Error("gfw fail");
+    throw new Error("gfw fail:不是 每日签到");
   }
 };
-
-// is successfully checked in
-async function checkStatus(page: Page): Promise<boolean> {
-  const label = await page.locator("#checkin-div").textContent();
-
-  if (label?.trim() !== "明日再来") {
-    await page.locator("#checkin-div").click();
-    return checkStatus(page);
-  } else {
-    return true;
-  }
-}

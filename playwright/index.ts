@@ -13,11 +13,12 @@ const INTERVAL = 1000 * 60 * 60 * 24;
 function handleService() {
   serviceList.forEach(({ service, desc }) => {
     try {
-      service().then(() => {
-        console.log(`%c脚本执行成功：${desc}`, "color:green;font-weight:bold;");
+      service().then((msg) => {
+        console.log(`%c脚本执行成功：${desc}(${msg})`, "color:green;font-weight:bold;");
       });
     } catch (error) {
       console.error(`脚本执行失败：${desc}`);
+      console.error(error);
     }
   });
 }
