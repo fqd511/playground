@@ -14,10 +14,10 @@ function handleService() {
   serviceList.forEach(({ service, desc }) => {
     try {
       service().then((msg) => {
-        console.log(`%c脚本执行成功：${desc}(${msg})`, "color:green;font-weight:bold;");
+        console.log(`%c脚本执行成功(${Date().toString()})：${desc}(${msg})`, "color:green;font-weight:bold;");
       });
     } catch (error) {
-      console.error(`脚本执行失败：${desc}`);
+      console.error(`脚本执行失败(${Date().toString()})：${desc}`);
       console.error(error);
     }
   });
