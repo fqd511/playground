@@ -11,6 +11,7 @@ place to try out interesting code toys
 - [x] playwright
 - [ ] flutter
 - [x] three.js
+- [ ] [react-three-fiber](https://github.com/pmndrs/react-three-fiber)
 - [ ] [tailwindcss](https://tailwindcss.com/)
 - [ ] [datadog](https://www.datadoghq.com/)
 - [ ] [joplin](https://github.com/laurent22/joplin) :印象笔记替代品
