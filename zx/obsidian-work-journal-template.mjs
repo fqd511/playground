@@ -5,7 +5,7 @@
  */
 
 // this is not necessary, just for better autocomplete in VS Code
-import 'zx/globals'
+import "zx/globals";
 
 /**
  * 步骤：
@@ -18,33 +18,59 @@ import 'zx/globals'
  */
 
 // dir with the /template folder in
-// const rootDir = '~/Documents/work-journal/journal'
-const rootDir = './'
+const rootDir = "/Users/fanqidi/Documents/work-journal/journal";
+// const rootDir = "./";
 
-const now  = new Date();
+/** ***********  calculate date start  ************ */
+const now = new Date();
 // '2022'
 const thisYear = now.getFullYear();
 // 'Q3'
-const thisQuarter = 'Q'+(now.getMonth()/3 +1);
+const thisQuarter = "Q" + (now.getMonth() / 3 + 1);
 // 'Jul'
-const thisMonth = now.toLocaleString('en-US',{month:'short'});
+const thisMonth = now.toLocaleString("en-US", { month: "short" });
 // '07'
-const thisMonthNum = now.toLocaleString('en-US',{month:'numeric'}).padStart(2, '0');
+const thisMonthNum = now
+  .toLocaleString("en-US", { month: "numeric" })
+  .padStart(2, "0");
 // Sunday - Saturday : 0 - 6
-const thisDayInWeek = now.getDay()
+const thisDayInWeek = now.getDay();
 // An integer number, between 1 and 31
-const thisDayInMonth = now.getDate()
-const mondayNum = thisDayInMonth - thisDayInWeek +1
-const sundayNum = thisDayInMonth - thisDayInWeek +7
+const thisDayInMonth = now.getDate();
+const mondayNum = thisDayInMonth - thisDayInWeek + 1;
+const sundayNum = thisDayInMonth - thisDayInWeek + 7;
 
 const _startYear = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0);
-const _msPerWeek = 7*24 * 60 * 60 * 1000;
-const thisWeek = 'W'+Math.ceil((now.getTime() - _startYear.getTime()) / _msPerWeek);
+const _msPerWeek = 7 * 24 * 60 * 60 * 1000;
+const thisWeek =
+  "W" + Math.ceil((now.getTime() - _startYear.getTime()) / _msPerWeek);
 
 // 2022/Q3/W28(0711-0717)
-const distDir = `${thisYear}/${thisQuarter}/${thisWeek}(${thisMonthNum+mondayNum}-${thisMonthNum+sundayNum})`
+const distDir = `${thisYear}/${thisQuarter}/${thisWeek}(${
+  thisMonthNum + mondayNum
+}-${thisMonthNum + sundayNum})`;
+/** ***********  calculate date end    ************ */
 
-// echo(thisMonthNum+mondayNum)
-echo(distDir)
+cd(rootDir);
 
-// await $`mkdir ${distDir}`
+// check template folder
+try {
+  await $`test -d template`;
+} catch (e) {
+  console.log(chalk.red("template folder not found"));
+  await $`exit 1`;
+}
+
+await $`mkdir -p ${distDir}`;
+await $`cp -r template/ ${distDir}`;
+
+// check summary.md
+try {
+  await $`test -f ${distDir}/summary.md`;
+} catch (e) {
+  console.log(chalk.red("summary.md not found"));
+  await $`exit 1`;
+}
+
+await $`mv -f ${distDir}/summary.md ${distDir}/summary.${thisWeek}.${thisMonth}.${thisQuarter}.md`;
+console.log(chalk.green("Template created successfully!"));
