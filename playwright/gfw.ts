@@ -23,15 +23,17 @@ export const GFWCheckIn = async () => {
 
   if (checkInLabel?.trim() === "每日签到") {
     await page.locator("#checkin-div").click();
-    const resultLabel = await page.locator("#swal2-title").textContent();
-    if (resultLabel?.trim() === "签到成功") {
-      browser.close().then(() => {
-        return "签到成功"
-      });
+    const resultTitleLabel = await page.locator("#swal2-title").textContent();
+    const resultContentLabel = await page.locator("#swal2-content").textContent();
+    if (resultTitleLabel?.trim() === "签到成功") {
+      await browser.close();
+      return `签到成功,${resultContentLabel}`;
     } else {
-      throw new Error("gfw fail:resultLabel 不是 签到成功");
+      throw new Error(
+        `gfw fail:签完之后 不是 签到成功,而是${resultTitleLabel?.trim()}`
+      );
     }
   } else {
-    throw new Error("gfw fail:不是 每日签到");
+    throw new Error("gfw fail:一开始就不是 每日签到");
   }
 };
