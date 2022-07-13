@@ -5,80 +5,49 @@ enum Direction {
   west = "WEST",
 }
 
-const directionList = [
+const CWOrderList = [
   Direction.north,
   Direction.east,
   Direction.south,
   Direction.west,
 ];
 
-export function calcCenter(
+/**
+ * 根据给定的参数，螺旋式的计算点集
+ * @param quantity 需要的点的数量
+ * @param radius 点与点之间的距离
+ * @param center 起始点
+ */
+export function spiralPointCalculator(
   quantity: number = 20,
   radius: number = 1,
   center: [number, number] = [0, 0]
 ) {
-  const generationList: Point[][] = [];
-  const root = new Point(radius, center);
-  generationList.push([root]);
-  let currentCount = 1;
-  console.log("into calc");
-  while (currentCount <= quantity) {
-    const nextGeneration: Point[] = [];
-    const latestGeneration = generationList.at(-1);
-    console.log("latest generation");
-    console.dir(latestGeneration);
-    latestGeneration?.forEach((point) => {
-      const newGenerations = point.generate();
-      console.log("newGenerations");
-      console.log(newGenerations);
-      nextGeneration.push(...newGenerations);
-    });
-    currentCount += nextGeneration.length;
-    console.log(`currentCount is ${currentCount}`);
-    if (nextGeneration.length) generationList.push(nextGeneration);
-    console.log("generationList");
-    console.log(generationList);
-    nextGeneration.length = 0;
-  }
-  const coordinateList = generationList.flat().map((point) => point.coordinate);
-  console.dir(coordinateList);
-  return coordinateList;
-}
-
-class Point {
-  coordinate: [number, number];
-
-  rad: number;
-
-  [Direction.north]: Point | null = null;
-  [Direction.east]: Point | null = null;
-  [Direction.south]: Point | null = null;
-  [Direction.west]: Point | null = null;
-
-  constructor(
-    rad: number,
-    parent: Point | [number, number],
-    direction?: Direction
-  ) {
-    this.rad = rad;
-    if (direction && parent instanceof Point) {
-      this[direction] = parent;
-      this.coordinate = addCoordinate(parent.coordinate, direction, rad);
-    } else {
-      this.coordinate = parent as [number, number];
-    }
-  }
-
-  public generate() {
-    const nextGeneration: Point[] = [];
-    for (const direction of directionList) {
-      if (!this[direction]) {
-        this[direction] = new Point(this.rad, this, reverse(direction));
-        nextGeneration.push(this[direction]!);
+  const resultPointList: [number, number][] = [center];
+  // how many points on current rotate leaf
+  let currentLeafLength = 1;
+  while(resultPointList.length < quantity){
+    for (let i = 0; i < 4; i++) {
+      const direction = CWOrderList[i];
+      for (let j = 0; j < currentLeafLength; j++) {
+        if (resultPointList.length >= quantity) {
+          return resultPointList;
+        }
+        const newPoint = addCoordinate(
+            resultPointList.at(-1)!,
+            direction,
+            radius
+        );
+        resultPointList.push(newPoint);
+      }
+      // extend leaf on every second turn
+      if (i % 2 === 1) {
+        currentLeafLength += 1;
       }
     }
-    return nextGeneration;
+
   }
+  return resultPointList
 }
 
 function addCoordinate(
@@ -94,13 +63,9 @@ function addCoordinate(
   }[direction] as [number, number];
 }
 
-function reverse(direction: Direction): Direction {
-  return {
-    [Direction.north]: Direction.south,
-    [Direction.east]: Direction.west,
-    [Direction.south]: Direction.north,
-    [Direction.west]: Direction.east,
-  }[direction];
-}
+const line = {
+  type: "LineString",
+  coordinates: spiralPointCalculator(40,2,[1,1]),
+};
 
-calcCenter();
+console.dir(line);
