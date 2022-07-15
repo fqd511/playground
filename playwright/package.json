@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "ts-node ./test.ts",
+    "serve": "pm2 start index.ts --name 'check-in-service' --watch",
+    "restart": "pm2 restart index.ts --name 'check-in-service' --watch"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
