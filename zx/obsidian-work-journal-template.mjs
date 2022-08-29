@@ -23,32 +23,44 @@ const rootDir = "/Users/fanqidi/Documents/work-journal/journal";
 
 /** ***********  calculate date start  ************ */
 const now = new Date();
-// '2022'
-const thisYear = now.getFullYear();
-// 'Q3'
-const thisQuarter = "Q" + (now.getMonth() / 3 + 1);
-// 'Jul'
-const thisMonth = now.toLocaleString("en-US", { month: "short" });
-// '07'
-const thisMonthNum = now
-  .toLocaleString("en-US", { month: "numeric" })
-  .padStart(2, "0");
+
 // Sunday - Saturday : 0 - 6
 const thisDayInWeek = now.getDay();
-// An integer number, between 1 and 31
-const thisDayInMonth = now.getDate();
-const mondayNum = thisDayInMonth - thisDayInWeek + 1;
-const sundayNum = thisDayInMonth - thisDayInWeek + 7;
+const _msPerDay = 24 * 60 * 60 * 1000;
+const _msPerWeek = 7 * _msPerDay;
 
-const _startYear = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0);
-const _msPerWeek = 7 * 24 * 60 * 60 * 1000;
+// date of monday in this week
+const mondayDate = new Date(now - ((thisDayInWeek - 1) * _msPerDay));
+// date of sunday in this week
+const sundayDate = new Date(now - ((thisDayInWeek - 7) * _msPerDay));
+
+// '2022'
+const thisYear = mondayDate.getFullYear();
+// 'Q3'
+const thisQuarter = "Q" + (Math.floor(now.getMonth() / 3) + 1);
+// 'Jul'
+const thisMonth = mondayDate.toLocaleString("en-US", { month: "short" });
+// '07'
+const thisMonthNum = mondayDate
+	.toLocaleString("en-US", { month: "numeric" })
+	.padStart(2, "0");
+// mostly same as thisMonthNum
+const thisMonthNumForSun = sundayDate
+	.toLocaleString("en-US", { month: "numeric" })
+	.padStart(2, "0");
+// An integer number, between 1 and 31
+const thisMondayInMonth = mondayDate.getDate().toString().padStart(2, "0");;
+// An integer number, between 1 and 31
+const thisSundayInMonth = sundayDate.getDate().toString().padStart(2, "0");;
+
+// timestamp at start of this year
+const _startYear = new Date(mondayDate.getFullYear(), 0, 1, 0, 0, 0, 0);
 const thisWeek =
-  "W" + Math.ceil((now.getTime() - _startYear.getTime()) / _msPerWeek);
+	"W" + Math.ceil((mondayDate.getTime() - _startYear.getTime()) / _msPerWeek);
 
 // 2022/Q3/W28(0711-0717)
-const distDir = `${thisYear}/${thisQuarter}/${thisWeek}(${
-  thisMonthNum + mondayNum
-}-${thisMonthNum + sundayNum})`;
+const distDir = `${thisYear}/${thisQuarter}/${thisWeek}(${thisMonthNum + thisMondayInMonth
+	}-${thisMonthNumForSun + thisSundayInMonth})`;
 /** ***********  calculate date end    ************ */
 
 cd(rootDir);
