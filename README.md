@@ -10,7 +10,7 @@ place to try out interesting code toys
 - [x] react
 - [x] playwright
 - [x] [zx](https://github.com/google/zx)
-- [ ] flutter
+- [x] flutter
 - [x] three.js
 - [ ] [react-three-fiber](https://github.com/pmndrs/react-three-fiber)
 - [ ] [tailwindcss](https://tailwindcss.com/)
