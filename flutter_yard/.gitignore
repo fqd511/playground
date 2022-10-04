@@ -1,8 +1,3 @@
-node_modules
-.idea
-playground.iml
-
-### content below is from flutter project
 # Miscellaneous
 *.class
 *.log
