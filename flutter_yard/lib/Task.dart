@@ -8,7 +8,7 @@ class Task implements Comparable<Task> {
 
   TaskPriorityEnum priority;
 
-  DateTime due;
+  DateTime due, createdAt, updatedAt;
 
   bool needNotification;
 
@@ -19,10 +19,14 @@ class Task implements Comparable<Task> {
   Task(
       {required this.title,
       DateTime? due,
+      DateTime? createdAt,
+      DateTime? updatedAt,
       List<Task>? children,
       TaskPriorityEnum? priority,
       bool? needNotification})
       : due = due ?? DateTime.now(),
+        createdAt = createdAt ?? DateTime.now(),
+        updatedAt = updatedAt ?? DateTime.now(),
         children = children ?? [],
         priority = priority ?? TaskPriorityEnum.medium,
         needNotification = needNotification ?? false,
