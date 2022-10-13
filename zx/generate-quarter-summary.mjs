@@ -19,7 +19,7 @@ const output = (await $`cd ${quarterPath}/ && ls -R`).stdout.trim();
 const fileNamePattern = new RegExp(/^summary\.W.*\.md$/);
 
 await $`echo "## Summary of work journals during "${quarterPath} > ${quarterPath}/summary.md`;
-await $`echo "> Updated at "${new Date().toLocaleString()} >> ${quarterPath}/summary.md`;
+await $`echo "\n> Updated at "${new Date().toLocaleString()}"\n" >> ${quarterPath}/summary.md`;
 
 output.split(/\s/).forEach((name) => {
     if (fileNamePattern.test(name)) {
