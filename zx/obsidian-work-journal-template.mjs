@@ -29,21 +29,21 @@ const _msPerWeek = 7 * _msPerDay;
 /**
  * get date of each day in week
  * @param {number} number 1 for mon;2 for tue;...;7 for sun;
- * @returns Date 
+ * @returns Date
  */
 function getDateByOrderInWeek(number) { return new Date(new Date() - ((new Date().getDay() - number) * _msPerDay)) }
 
 /**
  * get numeric str for month of given date
- * @param {Date} date 
+ * @param {Date} date
  * @returns {string} str: '01' for date in Jan; '02' for date in Feb; etc
  */
 function getMonthNumericStr(date) { return date.toLocaleString("en-US", { month: "numeric" }).padStart(2, "0") }
 
 /**
  * get numeric str for month of given date
- * @param {*} date 
- * @returns {string} string 
+ * @param {*} date
+ * @returns {string} string
  */
 function getDayNumericStrInMonth(date) { return date.getDate().toString().padStart(2, "0"); }
 
@@ -86,7 +86,7 @@ const thisWeek =
 const distDir = `${thisYear}/${thisQuarter}/${thisWeek}(${thisMonthNumForMon + thisMondayInMonth
 	}-${thisMonthNumForSun + thisSundayInMonth})`;
 /** ***********  calculate date end    ************ */
-
+$.verbose = false;
 cd(rootDir);
 
 // check template folder
