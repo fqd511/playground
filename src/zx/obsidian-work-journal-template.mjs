@@ -120,4 +120,11 @@ await $`mv -f ${distDir}/th.Wed.md ${distDir}/${thisYear}-${thisMonthNumForWen}-
 await $`mv -f ${distDir}/th.Thur.md ${distDir}/${thisYear}-${thisMonthNumForThu}-${thisThursdayInMonth}.th.Thur.md`;
 await $`mv -f ${distDir}/th.Fri.md ${distDir}/${thisYear}-${thisMonthNumForFri}-${thisFridayInMonth}.th.Fri.md`;
 
+// Notice!! sed param varyes on different platforms
+await $`sed -i '' -- 's/2023-08-05/${thisYear}-${thisMonthNumForMon}-${thisMondayInMonth}/g'  ${distDir}/${thisYear}-${thisMonthNumForMon}-${thisMondayInMonth}.th.Mon.md`;
+await $`sed -i '' -- 's/2023-08-05/${thisYear}-${thisMonthNumForTue}-${thisTuesdayInMonth}/g'  ${distDir}/${thisYear}-${thisMonthNumForTue}-${thisTuesdayInMonth}.th.Tue.md`;
+await $`sed -i '' -- 's/2023-08-05/${thisYear}-${thisMonthNumForWen}-${thisWendesdayInMonth}/g'  ${distDir}/${thisYear}-${thisMonthNumForWen}-${thisWendesdayInMonth}.th.Wed.md`;
+await $`sed -i '' -- 's/2023-08-05/${thisYear}-${thisMonthNumForThu}-${thisThursdayInMonth}/g'  ${distDir}/${thisYear}-${thisMonthNumForThu}-${thisThursdayInMonth}.th.Thur.md`;
+await $`sed -i '' -- 's/2023-08-05/${thisYear}-${thisMonthNumForFri}-${thisFridayInMonth}/g'  ${distDir}/${thisYear}-${thisMonthNumForFri}-${thisFridayInMonth}.th.Fri.md`;
+
 console.log(chalk.green("Template created successfully!"));
