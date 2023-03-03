@@ -80,7 +80,7 @@ const thisSundayInMonth = getDayNumericStrInMonth(sundayDate);
 // timestamp at start of this year
 const _startYear = new Date(mondayDate.getFullYear(), 0, 1, 0, 0, 0, 0);
 const thisWeek =
-	"W" + Math.ceil((mondayDate.getTime() - _startYear.getTime()) / _msPerWeek);
+	"W" + Math.ceil((mondayDate.getTime() - _startYear.getTime()) / _msPerWeek).toString().padStart(2, '0');
 
 // 2022/Q3/W28(0711-0717)
 const distDir = `${thisYear}/${thisQuarter}/${thisWeek}(${thisMonthNumForMon + thisMondayInMonth
