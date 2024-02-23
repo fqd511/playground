@@ -3,7 +3,7 @@ const path = require('path');
 const os = require('os');
 const pdf = require('pdf-parse');
 
-const folderPath = path.join(os.homedir(), '/Downloads/test/');
+const folderPath = path.join(os.homedir(), '/Downloads/invoice/');
 
 const typeLabels = ['餐饮', '医药', '客运', '设备']
 fs.readdir(folderPath, (err, files) => {
@@ -20,14 +20,18 @@ fs.readdir(folderPath, (err, files) => {
                     console.error(`Error reading file ${file}: ${err}`);
                     return;
                 }
-
                 pdf(data).then(function (pdfData) {
                     const text = pdfData.text;
 
-                    // Extract data
+                    // Extract date
                     const regexDate = /(\d{4}[\s年]+\d{2}[\s月]+\d{2}[\s日]+)/;
                     const dateMatch = text.match(regexDate);
                     let invoiceDate = dateMatch ? new Date(dateMatch[1].replaceAll(/[年月日]/g, '/')) : '';
+
+                    // Extract code
+                    const regexCode = /(\d{20})/;
+                    const codeMatch = text.match(regexCode);
+                    let invoiceCode = codeMatch ? codeMatch[1] : Date.now().toString();
 
                     // extract amount
                     const regexAmount = /¥(\d+\.\d{2})/g;
@@ -42,7 +46,7 @@ fs.readdir(folderPath, (err, files) => {
                     let invoiceAmount = maxAmount ? `¥${maxAmount.toFixed(2)}` : '';
 
                     if (!invoiceDate || !invoiceAmount) {
-                        console.log('信息提取失败，文件内容如下：\n\n',text);
+                        console.log('信息提取失败，文件内容如下：\n\n', text);
                     }
 
                     // extract type
@@ -52,7 +56,7 @@ fs.readdir(folderPath, (err, files) => {
                     })
 
                     // Rename the PDF file based on extracted information
-                    const newFileName = `${parseDate(invoiceDate)}_${invoiceAmount.slice(1)}_${invoiceType || '其他发票'}.pdf`;
+                    const newFileName = `${parseDate(invoiceDate)}_${invoiceAmount.slice(1)}_${invoiceType || '其他发票'}_${invoiceCode.slice(-4)}.pdf`;
                     const newFilePath = path.join(folderPath, newFileName);
 
                     fs.rename(filePath, newFilePath, (err) => {
