@@ -31,7 +31,7 @@ fs.readdir(folderPath, (err, files) => {
                     // Extract code
                     const regexCode = /(\d{20})/;
                     const codeMatch = text.match(regexCode);
-                    let invoiceCode = codeMatch ? codeMatch[1] : Date.now().toString();
+                    let invoiceCode = codeMatch ? codeMatch[1] : Date.now().toString()+'_';
 
                     // extract amount
                     const regexAmount = /¥(\d+\.\d{2})/g;
@@ -56,7 +56,7 @@ fs.readdir(folderPath, (err, files) => {
                     })
 
                     // Rename the PDF file based on extracted information
-                    const newFileName = `${parseDate(invoiceDate)}_${invoiceAmount.slice(1)}_${invoiceType || '其他发票'}_${invoiceCode.slice(-4)}.pdf`;
+                    const newFileName = `${parseDate(invoiceDate)}_${invoiceAmount.slice(1)}_${invoiceType || '其他发票'}_${invoiceCode.slice(-8)}.pdf`;
                     const newFilePath = path.join(folderPath, newFileName);
 
                     fs.rename(filePath, newFilePath, (err) => {
