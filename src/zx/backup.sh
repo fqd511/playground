@@ -9,25 +9,29 @@
 # * GoogleAuthenticator [manually]
 #
 
+# create local backup files under /Downloads
 date=$(date +'%Y-%m-%d')
 
 cd ~/Downloads
 
+rm -rf ${date}
+
 mkdir ${date}
 
-cd ${date}
+cd ${date} 
 
 cp ~/.zshrc ~/Downloads/${date}/.zshrc
 
 brew bundle dump --file=~/Downloads/${date}/Brewfile
 
+echo 'brew file created'
 
-# update Brewfile under ~
+# backup dotfiles to github
 cd ~
 rm Brewfile
 brew bundle dump
 
-## 检测一下有没有 Raycast 备份文件
+# 检测一下有没有 Raycast 备份文件
 
 # 使用shopt -s nullglob保留未匹配的文件列表
 shopt -s nullglob
@@ -48,7 +52,11 @@ if ! $has_raycast_backup_file; then
   exit 1
 fi
 
-# 执行 backupDotfiles 备份到 GitHub
 ./backupDotfiles.sh
 
-echo 'dotFile created and executed backupDotfiles.sh'
+echo 'dotFile created'
+
+# log
+current_time=$(date +"%Y-%m-%d %H:%M:%S")
+echo "Current time: $current_time"
+say '备份成功'
