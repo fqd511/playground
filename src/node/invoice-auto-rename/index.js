@@ -56,7 +56,7 @@ fs.readdir(folderPath, (err, files) => {
                     })
 
                     // Rename the PDF file based on extracted information
-                    const newFileName = `${parseDate(invoiceDate)}_${invoiceAmount.slice(1)}_${invoiceType || '其他发票'}_${invoiceCode.slice(-8)}.pdf`;
+                    const newFileName = `${parseDate(invoiceDate)}_${invoiceType || '其他发票'}_${invoiceAmount.slice(1)}_${invoiceCode.slice(-8)}.pdf`;
                     const newFilePath = path.join(folderPath, newFileName);
 
                     fs.rename(filePath, newFilePath, (err) => {
