@@ -9,6 +9,9 @@
 # * GoogleAuthenticator [manually]
 #
 
+
+echo "$(date +"%Y-%m-%d %H:%M:%S") : Start backup"
+
 # create local backup files under /Downloads
 date=$(date +'%Y-%m-%d')
 
@@ -56,7 +59,5 @@ fi
 
 echo 'dotFile created'
 
-# log
-current_time=$(date +"%Y-%m-%d %H:%M:%S")
-echo "Current time: $current_time"
+echo "$(date +"%Y-%m-%d %H:%M:%S") : Finish backup"
 say '备份成功'
