@@ -43,4 +43,4 @@ setTimeout(() => {
 	clickMenu();
 	// 启动倒计时
 	startCountdown();
-}, oneMinute * initialDelay)
+}, oneMinute * initialDelayInMin)
