@@ -26,7 +26,7 @@ function startCountdown() {
 	// 开始倒计时
 	var countdown = setInterval(function () {
 		countdownTime -= oneMinute;
-		console.log("倒计时剩余时间：" + countdownTime / oneMinute + "分钟");
+		console.log(new Date().toLocaleString(), "剩余时间：" + countdownTime / oneMinute + "分钟");
 
 		// 倒计时结束时点击特定元素
 		if (countdownTime <= 0) {
