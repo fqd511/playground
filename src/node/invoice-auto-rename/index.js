@@ -34,11 +34,11 @@ fs.readdir(folderPath, (err, files) => {
                     let invoiceCode = codeMatch ? codeMatch[1] : Date.now().toString()+'_';
 
                     // extract amount
-                    const regexAmount = /¥(\d+\.\d{2})/g;
+                    const regexAmount = /[¥￥]\s*(\d+\.\d{2})/g;
                     let maxAmount = 0;
                     let amountMatch;
                     while ((amountMatch = regexAmount.exec(text)) !== null) {
-                        const amount = parseFloat(amountMatch[1]);
+                        const amount = parseFloat(amountMatch[1]);  
                         if (amount > maxAmount) {
                             maxAmount = amount;
                         }
