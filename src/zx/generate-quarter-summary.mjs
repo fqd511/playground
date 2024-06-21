@@ -41,9 +41,10 @@ const fileNamePattern = new RegExp(/^summary\.W.*\.md$/);
 await $`echo "## Summary of work journals during "${quarterPath} > ${quarterPath}/summary.md`;
 await $`echo "\n> Updated at "${new Date().toLocaleString()}"\n" >> ${quarterPath}/summary.md`;
 
-output.split(/\s/).forEach((name) => {
+for (const name of output.split(/\s/)){
     if (fileNamePattern.test(name)) {
-        $`echo "\![](${name})" >> ${quarterPath}/summary.md`;
+        await $`echo "\[${name}](${name})" >> ${quarterPath}/summary.md`;
+        await $`echo "\![${name}](${name})" >> ${quarterPath}/summary.md`;
         console.log(chalk.green(`Write "![](${name})" into ${quarterPath}/summary.md`));
     }
-})
+}
