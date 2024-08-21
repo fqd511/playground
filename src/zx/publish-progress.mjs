@@ -86,7 +86,7 @@ const allFileListOutput = (await $`find . -type f`).stdout.trim();
 const weekFileListOutput = (await $`cd ${weekPath}/ && ls -Ra`).stdout.trim();
 
 // patterns for file names
-const thisWeekFileNamePattern = new RegExp(/th/);
+const thisWeekFileNamePattern = new RegExp(/(th)|(st)|(rd)|(nd)/);
 const weekSummariesFileNamePattern = new RegExp(/summary.W/);
 const quarterSummariesFileNamePattern = new RegExp(/summary.md/);
 
