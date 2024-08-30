@@ -17,7 +17,7 @@ fs.readdir(folderPath, async (err, files) => {
       const filePath = path.join(folderPath, file);
       let invoiceAmount, invoiceDate, invoiceType, invoiceCode;
 
-      // 处理一下高德打车发票，直接中命名中提取信息
+      // 处理一下高德打车发票，直接从命名中提取信息
       if (file.includes("高德打车电子发票")) {
         invoiceAmount = file.split("-")[1].slice(0, -1);
         invoiceCode = Date.now().toString() + "_";
